@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainScreenViewController: UIViewController {
 
@@ -60,6 +61,21 @@ class MainScreenViewController: UIViewController {
         let backGroundImage = UIImageView(frame: UIScreen.main.bounds)
         backGroundImage.contentMode = .scaleToFill
         self.view.insertSubview(backGroundImage, at: 0)
+        
+        // Location
+        let locationManager = CLLocationManager()
+        locationManager.requestAlwaysAuthorization()
+
+        var currentLocation: CLLocation!
+        if
+           CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+           CLLocationManager.authorizationStatus() ==  .authorizedAlways
+        {
+            currentLocation = locationManager.location
+            print("Location Enabled")
+            WeatherViewModel.defaultAddress = "\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)"
+            currentWeatherViewModel.changeLocation(to: WeatherViewModel.defaultAddress, isAqi: true)
+        }
         
         // data binding
         currentWeatherViewModel.currentWeatherDescription.bind { [weak self] currentWeatherView in

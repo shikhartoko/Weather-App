@@ -24,7 +24,7 @@ public class WeatherViewModel {
         return ans
     }
     
-    private static let defaultAddress = "New Delhi"
+    public static var defaultAddress = "New Delhi"
     
     func checkCondition(conditionText : String) -> String {
         if conditionText.contains("snow") || conditionText.contains("ice") ||
@@ -93,6 +93,7 @@ public class WeatherViewModel {
     }
     
     init() {
+        print(Self.defaultAddress)
       changeLocation(to: Self.defaultAddress, isAqi: true)
     }
 }
