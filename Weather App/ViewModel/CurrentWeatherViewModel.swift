@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 public class WeatherViewModel {
     let locationName = Box("Loading..")
@@ -64,6 +65,20 @@ public class WeatherViewModel {
         return UIImage(named: conditionName)!
     }
     
+    func setCurrentLocation () {
+        let locManager = CLLocationManager()
+        locManager.requestWhenInUseAuthorization()
+        var currentLocation: CLLocation!
+
+        if
+           CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+           CLLocationManager.authorizationStatus() ==  .authorizedAlways
+        {
+            currentLocation = locManager.location
+            changeLocation(to: "\(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)", isAqi: true)
+        }
+    }
+    
     func changeLocation (to city: String, isAqi: Bool) {
         locationName.value = "Loading"
         ApiFunctions.fetchForecastedData(city: city, days: 11, aqi: isAqi, alerts: false) { data in
@@ -93,7 +108,6 @@ public class WeatherViewModel {
     }
     
     init() {
-        print(Self.defaultAddress)
-      changeLocation(to: Self.defaultAddress, isAqi: true)
+        setCurrentLocation()
     }
 }

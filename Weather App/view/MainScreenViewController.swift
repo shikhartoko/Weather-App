@@ -22,6 +22,11 @@ class MainScreenViewController: UIViewController {
         searchLocationVC.currentWeatherViewModel = currentWeatherViewModel
         present(searchLocationVC, animated: true)
     }
+    @IBOutlet weak var openSearchBtn: UIButton!
+    @IBAction func setCurrentLocation(_ sender: Any) {
+        currentWeatherViewModel.setCurrentLocation()
+    }
+    @IBOutlet weak var currentLocationBtn: UIButton!
     
     // Hourly Weather View
     @IBOutlet weak var HourlyWeatherCollectionView: UICollectionView!
@@ -62,20 +67,8 @@ class MainScreenViewController: UIViewController {
         backGroundImage.contentMode = .scaleToFill
         self.view.insertSubview(backGroundImage, at: 0)
         
-        // Location
-        let locationManager = CLLocationManager()
-        locationManager.requestAlwaysAuthorization()
-
-        var currentLocation: CLLocation!
-        if
-           CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-           CLLocationManager.authorizationStatus() ==  .authorizedAlways
-        {
-            currentLocation = locationManager.location
-            print("Location Enabled")
-            WeatherViewModel.defaultAddress = "\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)"
-            currentWeatherViewModel.changeLocation(to: WeatherViewModel.defaultAddress, isAqi: true)
-        }
+        openSearchBtn.layer.cornerRadius = 10
+        currentLocationBtn.layer.cornerRadius = 10
         
         // data binding
         currentWeatherViewModel.currentWeatherDescription.bind { [weak self] currentWeatherView in
