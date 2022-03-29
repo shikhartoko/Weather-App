@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Moya
 
 class ViewController: UIViewController {
-
+    
+    let city = "London"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
 
