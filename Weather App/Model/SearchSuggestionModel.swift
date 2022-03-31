@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SearchSuggestion : Codable {
-    let id : Int
-    let name : String
-    let region : String
-    let country : String
-    let lat : Double
-    let lon : Double
+public struct SearchSuggestion : Codable {
+    public let id : Int
+    public let name : String
+    public let region : String
+    public let country : String
+    public let lat : Double
+    public let lon : Double
 }

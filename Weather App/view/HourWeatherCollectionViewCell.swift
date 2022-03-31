@@ -8,8 +8,8 @@
 import UIKit
 
 class HourWeatherCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var TimeLabel: UILabel!
-    @IBOutlet weak var TempLabel: UILabel!
-    @IBOutlet weak var conditionIcon: UIImageView!
+    @IBOutlet public weak var timeLabel: UILabel!
+    @IBOutlet public weak var tempLabel: UILabel!
+    @IBOutlet public weak var conditionIcon: UIImageView!
     static let id : String = "HourWeatherCollectionViewCellId"
 }

@@ -9,10 +9,10 @@ import UIKit
 
 class LocationSuggestionTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var regionLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
-    @IBOutlet weak var bgView: UIView!
-    static let id = "locationSuggestionTableCellId"
+    @IBOutlet public weak var nameLabel: UILabel!
+    @IBOutlet public weak var regionLabel: UILabel!
+    @IBOutlet public weak var countryLabel: UILabel!
+    @IBOutlet public weak var bgView: UIView!
+    public static let id = "locationSuggestionTableCellId"
 
 }

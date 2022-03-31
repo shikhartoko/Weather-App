@@ -8,29 +8,9 @@
 import Foundation
 import Moya
 
-class ApiFunctions {
-    static func fetchCurrentWeatherData(city : String, aqi: Bool, completion: @escaping (CurrentWeatherResponse) -> Void) {
-        let provider = MoyaProvider<Api>()
-        provider.request(.current(city: city, aqi: aqi)) { result in
-            switch result {
-            case .success(let response):
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    print(try response.mapJSON())
-                    let result = try decoder.decode(CurrentWeatherResponse.self, from: response.data)
-                    completion(result)
-                } catch let error {
-                    print("Error occured \(error)")
-                }
-            case .failure:
-              // 5
-              print("Failure")
-            }
-        }
-    }
+public class ApiFunctions {
     
-    static func fetchLocationSuggestions(query : String, completion: @escaping ([SearchSuggestion]) -> Void) {
+    internal static func fetchLocationSuggestions(query : String, completion: @escaping ([SearchSuggestion]?, String?) -> Void) {
         let provider = MoyaProvider<Api>()
         provider.request(.autoComplete(inputCity: query)) { result in
             switch result {
@@ -39,18 +19,17 @@ class ApiFunctions {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     let result = try decoder.decode([SearchSuggestion].self, from: response.data)
-                    completion(result)
+                    completion(result, nil)
                 } catch let error {
-                    print("Error occured \(error)")
+                    completion(nil, error.localizedDescription)
                 }
-            case .failure:
-              // 5
-              print("Failure")
+            case .failure(let error):
+                completion(nil, error.localizedDescription)
             }
         }
     }
     
-    static func fetchForecastedData(city: String, days: Int, aqi: Bool, alerts: Bool, completion: @escaping (ForecastWeatherResponse) -> Void) {
+    internal static func fetchForecastedData(city: String, days: Int, aqi: Bool, alerts: Bool, completion: @escaping (ForecastWeatherResponse?, String?) -> Void) {
         let provider = MoyaProvider<Api>()
         provider.request(.forecast(city: city, days: days, aqi: aqi, alerts: alerts)) { result in
             switch result {
@@ -59,14 +38,13 @@ class ApiFunctions {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     let result = try decoder.decode(ForecastWeatherResponse.self, from: response.data)
-                    completion(result)
+                    completion(result, nil)
                     
                 } catch let error {
-                    print("Error occured \(error)")
+                    completion(nil, error.localizedDescription)
                 }
-            case .failure:
-              // 5
-              print("Failure")
+            case .failure(let error):
+                completion(nil, error.localizedDescription)
             }
         }
     }

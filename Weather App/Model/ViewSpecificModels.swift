@@ -7,44 +7,44 @@
 
 import Foundation
 
-struct CurrentWeatherCompact {
-    var location : String = ""
-    var temp : String = ""
-    var condition : String = ""
-    var lat : String = ""
-    var long : String = ""
+public struct CurrentWeatherCompact {
+    public var location : String = ""
+    public var temp : String = ""
+    public var condition : String = ""
+    public var lat : String = ""
+    public var long : String = ""
 }
 
-struct AirQualityCompact {
-    var co : String = ""
-    var no2 : String = ""
-    var pm25 : String = ""
-    var pm10 : String = ""
+public struct AirQualityCompact {
+    public var co : String = ""
+    public var no2 : String = ""
+    public var pm25 : String = ""
+    public var pm10 : String = ""
 }
 
-struct WindCompact {
-    var speed : String = ""
-    var degree : String = ""
-    var direction : String = ""
+public struct WindCompact {
+    public var speed : String = ""
+    public var degree : String = ""
+    public var direction : String = ""
 }
 
-struct DayForecastCompact {
-    let day : String
-    let condnUrl : String
-    let minTemp : String
-    let avgTemp : String
-    let maxTemp : String
+public struct DayForecastCompact {
+    public let day : String
+    public let condnUrl : String
+    public let minTemp : String
+    public let avgTemp : String
+    public let maxTemp : String
 }
 
-struct HourForecastCompact {
-    let temp : String
-    let cndnUrl : String
-    let time : String
+public struct HourForecastCompact {
+    public let temp : String
+    public let cndnUrl : String
+    public let time : String
 }
 
-struct AstroCompact {
-    var sunrise : String = ""
-    var sunset : String = ""
-    var moonrise : String = ""
-    var moonset : String = ""
+public struct AstroCompact {
+    public var sunrise : String = ""
+    public var sunset : String = ""
+    public var moonrise : String = ""
+    public var moonset : String = ""
 }

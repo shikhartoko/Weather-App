@@ -7,27 +7,27 @@
 
 import Foundation
 
-struct Position : Codable {
-    let lat : Double
-    let lon : Double
+public struct Position : Codable {
+    public let lat : Double
+    public let lon : Double
 }
 
-struct Astro : Codable {
-    let sunrise : String
-    let sunset : String
-    let moonrise : String
-    let moonset : String
-    let moonPhase : String
-    let moonIllumination : String
+public struct Astro : Codable {
+    public let sunrise : String
+    public let sunset : String
+    public let moonrise : String
+    public let moonset : String
+    public let moonPhase : String
+    public let moonIllumination : String
 }
 
-struct AirQuality : Codable {
-    let co : Double
-    let o3 : Double
-    let no2 : Double
-    let so2 : Double
-    let pm10 : Double
-    let pm25 : Double
+public struct AirQuality : Codable {
+    public let co : Double
+    public let o3 : Double
+    public let no2 : Double
+    public let so2 : Double
+    public let pm10 : Double
+    public let pm25 : Double
     
     enum Codingkeys : String, CodingKey {
         case co
@@ -38,7 +38,7 @@ struct AirQuality : Codable {
         case pm25 = "pm2_5"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let response = try decoder.container(keyedBy: CodingKeys.self)
         co = try response.decode(Double.self, forKey: .co)
         o3 = try response.decode(Double.self, forKey: .o3)
@@ -49,15 +49,15 @@ struct AirQuality : Codable {
     }
 }
 
-struct Location : Codable {
-    let name : String
-    let region : String
-    let country : String
-    let lat : Double
-    let lon : Double
-    let tzId : String
-    let localtimeEpoch : Int
-    let localtime : String
+public struct Location : Codable {
+    public let name : String
+    public let region : String
+    public let country : String
+    public let lat : Double
+    public let lon : Double
+    public let tzId : String
+    public let localtimeEpoch : Int
+    public let localtime : String
     
     enum Codingkeys : String, CodingKey {
         case name
@@ -71,31 +71,31 @@ struct Location : Codable {
     }
 }
 
-struct Condition : Codable {
-    let text : String
-    let icon : String
-    let code : Int
+public struct Condition : Codable {
+    public let text : String
+    public let icon : String
+    public let code : Int
 }
 
-struct WeatherDescription : Codable {
-    let tempC : Double
-    let tempF : Double
-    let isDay : Int
-    let condition : Condition
-    let windMph : Double
-    let windKph : Double
-    let windDegree : Int
-    let windDir : String
-    let pressureMb : Double
-    let pressureIn : Double
-    let precipMm : Double
-    let precipIn : Double
-    let humidity : Int
-    let cloud : Int
-    let feelslikeC : Double
-    let feelslikeF : Double
-    let uv : Double
-    let gustMph : Double
-    let gustKph : Double
-    let airQuality : AirQuality
+public struct WeatherDescription : Codable {
+    public let tempC : Double
+    public let tempF : Double
+    public let isDay : Int
+    public let condition : Condition
+    public let windMph : Double
+    public let windKph : Double
+    public let windDegree : Int
+    public let windDir : String
+    public let pressureMb : Double
+    public let pressureIn : Double
+    public let precipMm : Double
+    public let precipIn : Double
+    public let humidity : Int
+    public let cloud : Int
+    public let feelslikeC : Double
+    public let feelslikeF : Double
+    public let uv : Double
+    public let gustMph : Double
+    public let gustKph : Double
+    public let airQuality : AirQuality
 }

@@ -183,7 +183,7 @@
                                                             <color key="baseBackgroundColor" systemColor="tintColor"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="OpenSearchLocationScreen:" destination="NUG-rI-1h7" eventType="touchUpInside" id="mxO-4G-tlj"/>
+                                                            <action selector="openSearchLocationScreen:" destination="NUG-rI-1h7" eventType="touchUpInside" id="DMm-1A-jg0"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOb-A7-nD5">

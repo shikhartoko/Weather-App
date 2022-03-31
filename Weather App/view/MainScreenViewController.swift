@@ -8,99 +8,87 @@
 import UIKit
 import CoreLocation
 
-class MainScreenViewController: UIViewController {
+internal final class MainScreenViewController: UIViewController {
 
     // Current Weather View
-    @IBOutlet weak var LocationLabel: UILabel!
-    @IBOutlet weak var CurrentTempLabel: UILabel!
-    @IBOutlet weak var CurrentWeatherCondn: UILabel!
-    @IBOutlet weak var CurrentLocationLat: UILabel!
-    @IBOutlet weak var CurrentLocationLong: UILabel!
-    @IBAction func OpenSearchLocationScreen(_ sender: Any) {
+    @IBOutlet private weak var locationLabel: UILabel!
+    @IBOutlet private weak var currentTempLabel: UILabel!
+    @IBOutlet private weak var currentWeatherCondn: UILabel!
+    @IBOutlet private weak var currentLocationLat: UILabel!
+    @IBOutlet private weak var currentLocationLong: UILabel!
+    @IBAction private func openSearchLocationScreen(_ sender: Any) {
         let searchLocationVC = storyboard?.instantiateViewController(withIdentifier: SearchLocationViewController.id) as! SearchLocationViewController
         searchLocationVC.modalPresentationStyle = .fullScreen
         searchLocationVC.currentWeatherViewModel = currentWeatherViewModel
         present(searchLocationVC, animated: true)
     }
-    @IBOutlet weak var openSearchBtn: UIButton!
-    @IBAction func setCurrentLocation(_ sender: Any) {
+    @IBOutlet private weak var openSearchBtn: UIButton!
+    @IBAction private func setCurrentLocation(_ sender: Any) {
         currentWeatherViewModel.setCurrentLocation()
     }
-    @IBOutlet weak var currentLocationBtn: UIButton!
+    @IBOutlet private weak var currentLocationBtn: UIButton!
     
     // Hourly Weather View
-    @IBOutlet weak var HourlyWeatherCollectionView: UICollectionView!
+    @IBOutlet private weak var hourlyWeatherCollectionView: UICollectionView!
     
     // 10 Day ForeCast View
-    @IBOutlet weak var ForecastTableView: UITableView!
+    @IBOutlet private weak var forecastTableView: UITableView!
     
     // Weather Details 1
     // Air Quality
-    @IBOutlet weak var COValueLabel: UILabel!
-    @IBOutlet weak var NO2ValueLabel: UILabel!
-    @IBOutlet weak var PM25ValueLabel: UILabel!
-    @IBOutlet weak var PM10ValueLabel: UILabel!
+    @IBOutlet private weak var cOValueLabel: UILabel!
+    @IBOutlet private weak var nO2ValueLabel: UILabel!
+    @IBOutlet private weak var pM25ValueLabel: UILabel!
+    @IBOutlet private weak var pM10ValueLabel: UILabel!
     
     // Wind
-    @IBOutlet weak var SpeedValueLabel: UILabel!
-    @IBOutlet weak var DegreeValueLabel: UILabel!
-    @IBOutlet weak var DirectionValueLabel: UILabel!
+    @IBOutlet private weak var speedValueLabel: UILabel!
+    @IBOutlet private weak var degreeValueLabel: UILabel!
+    @IBOutlet private weak var directionValueLabel: UILabel!
     
     // Astro
     
-    @IBOutlet weak var sunriseTimeLabel: UILabel!
-    @IBOutlet weak var sunsetTimeLabel: UILabel!
-    @IBOutlet weak var moonRiseTimeLabel: UILabel!
-    @IBOutlet weak var moonsetTimeLabel: UILabel!
+    @IBOutlet private weak var sunriseTimeLabel: UILabel!
+    @IBOutlet private weak var sunsetTimeLabel: UILabel!
+    @IBOutlet private weak var moonRiseTimeLabel: UILabel!
+    @IBOutlet private weak var moonsetTimeLabel: UILabel!
     
-    let currentWeatherViewModel = WeatherViewModel()
-    var forecastData : [DayForecastCompact] = []
-    var todayForecast : [HourForecastCompact] = []
+    private let currentWeatherViewModel = WeatherViewModel()
+    private var forecastData : [DayForecastCompact] = []
+    private var todayForecast : [HourForecastCompact] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        HourlyWeatherCollectionView.delegate = self
-        HourlyWeatherCollectionView.dataSource = self
-        ForecastTableView.delegate = self
-        ForecastTableView.dataSource = self
+    private func bindViewModel () {
+        currentWeatherViewModel.alertDelegate = self
+        
         let backGroundImage = UIImageView(frame: UIScreen.main.bounds)
         backGroundImage.contentMode = .scaleToFill
         self.view.insertSubview(backGroundImage, at: 0)
         
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        let blurview = UIVisualEffectView(effect: blurEffect)
-        blurview.frame = UIScreen.main.bounds
-        self.view.insertSubview(blurview, at: 1)
-        
-        openSearchBtn.layer.cornerRadius = 10
-        currentLocationBtn.layer.cornerRadius = 10
-        
-        // data binding
         currentWeatherViewModel.currentWeatherDescription.bind { [weak self] currentWeatherView in
-            self?.LocationLabel.text = currentWeatherView.location
-            self?.CurrentTempLabel.text = "\(currentWeatherView.temp)°"
-            self?.CurrentWeatherCondn.text = currentWeatherView.condition
-            self?.CurrentLocationLat.text = "H:\(currentWeatherView.lat)°"
-            self?.CurrentLocationLong.text = "L:\(currentWeatherView.long)°"
+            self?.locationLabel.text = currentWeatherView.location
+            self?.currentTempLabel.text = "\(currentWeatherView.temp)°"
+            self?.currentWeatherCondn.text = currentWeatherView.condition
+            self?.currentLocationLat.text = "H:\(currentWeatherView.lat)°"
+            self?.currentLocationLong.text = "L:\(currentWeatherView.long)°"
         }
         currentWeatherViewModel.currentAirQuality.bind { [weak self] airQualityView in
-            self?.COValueLabel.text = airQualityView.co
-            self?.NO2ValueLabel.text = airQualityView.no2
-            self?.PM25ValueLabel.text = airQualityView.pm25
-            self?.PM10ValueLabel.text = airQualityView.pm10
+            self?.cOValueLabel.text = airQualityView.co
+            self?.nO2ValueLabel.text = airQualityView.no2
+            self?.pM25ValueLabel.text = airQualityView.pm25
+            self?.pM10ValueLabel.text = airQualityView.pm10
         }
         currentWeatherViewModel.currentWindDescription.bind { [weak self] windViewModel in
-            self?.SpeedValueLabel.text = windViewModel.speed
-            self?.DegreeValueLabel.text = windViewModel.degree
-            self?.DirectionValueLabel.text = windViewModel.direction
+            self?.speedValueLabel.text = windViewModel.speed
+            self?.degreeValueLabel.text = windViewModel.degree
+            self?.directionValueLabel.text = windViewModel.direction
         }
         currentWeatherViewModel.forecastedData.bind { [weak self] tempForecastDataList in
             self?.forecastData = tempForecastDataList
-            self?.ForecastTableView.reloadData()
+            self?.forecastTableView.reloadData()
         }
         currentWeatherViewModel.hourforecastToday.bind { [weak self] hourForecastData in
             self?.todayForecast = hourForecastData
-            self?.HourlyWeatherCollectionView.reloadData()
+            self?.hourlyWeatherCollectionView.reloadData()
         }
         currentWeatherViewModel.backGroundImage.bind { bkgImage in
             backGroundImage.image = bkgImage
@@ -113,6 +101,24 @@ class MainScreenViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        hourlyWeatherCollectionView.delegate = self
+        hourlyWeatherCollectionView.dataSource = self
+        forecastTableView.delegate = self
+        forecastTableView.dataSource = self
+
+        bindViewModel()
+        
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let blurview = UIVisualEffectView(effect: blurEffect)
+        blurview.frame = UIScreen.main.bounds
+        self.view.insertSubview(blurview, at: 1)
+        
+        openSearchBtn.layer.cornerRadius = 10
+        currentLocationBtn.layer.cornerRadius = 10
+    }
+    
 }
 
 extension MainScreenViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -122,14 +128,14 @@ extension MainScreenViewController: UICollectionViewDelegate,UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourWeatherCollectionViewCell.id, for: indexPath) as? HourWeatherCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourWeatherCollectionViewCell.id, for: indexPath) as! HourWeatherCollectionViewCell
         let item = self.todayForecast[indexPath.row]
-        cell?.TempLabel.text = item.temp
-        var img = UIImage(named: item.cndnUrl.getImageLocationFromUrl())!
-        cell?.conditionIcon.image = img
-        cell?.TimeLabel.text = item.time.lastFiveSubstring()
-        cell?.layer.cornerRadius = 10
-        return cell!
+        cell.tempLabel.text = item.temp
+        let img = UIImage(named: item.cndnUrl.getImageLocationFromUrl())
+        cell.conditionIcon.image = img
+        cell.timeLabel.text = item.time.lastFiveSubstring()
+        cell.layer.cornerRadius = 10
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -145,13 +151,21 @@ extension MainScreenViewController : UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.forecastData[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: ForecastWeatherTableViewCell.id) as! ForecastWeatherTableViewCell
-        cell.DayLabel?.text = item.day.lastFiveSubstring()
-        cell.DayConditionImage.image = UIImage(named: item.condnUrl.getImageLocationFromUrl())
-        cell.MinTempLabel?.text = item.minTemp
-        cell.AvgTempLabel?.text = item.avgTemp
-        cell.MaxTempLabel?.text = item.maxTemp
+        cell.dayLabel?.text = item.day.lastFiveSubstring()
+        cell.dayConditionImage.image = UIImage(named: item.condnUrl.getImageLocationFromUrl())
+        cell.minTempLabel?.text = item.minTemp
+        cell.avgTempLabel?.text = item.avgTemp
+        cell.maxTempLabel?.text = item.maxTemp
         return cell
     }
 }
 
+extension MainScreenViewController : ShowAlertDelegate {
+    func showAlert(alertMessage: String) {
+        let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+}
 

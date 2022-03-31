@@ -8,26 +8,19 @@
 import Foundation
 
 final class Box<T> {
-  //1 giving an alias to a closure such that it accepts a template field and returns nothing
-  typealias Listener = (T) -> Void
+  internal typealias Listener = (T) -> Void
   
-  // creating a var of type optional listener
-  var listener: Listener?
-  //2
-  var value: T {
+  internal var listener: Listener?
+  internal var value: T {
     didSet {
       listener?(value)
     }
   }
-  //3
-  init(_ value: T) {
+  internal init(_ value: T) {
     self.value = value
   }
-  //4
-  func bind(listener: Listener?) {
-    // make listener equal to listener clousre given
+  internal func bind(listener: Listener?) {
     self.listener = listener
-      // call the listener closure
     listener?(value)
   }
 }

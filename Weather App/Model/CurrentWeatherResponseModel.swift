@@ -7,9 +7,7 @@
 
 import Foundation
 
-struct CurrentWeatherResponse : Codable {
-    let location : Location
-    let current : WeatherDescription
+public struct CurrentWeatherResponse : Codable {
+    public let location : Location
+    public let current : WeatherDescription
 }
-
-

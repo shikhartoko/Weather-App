@@ -6,18 +6,26 @@
 //
 
 import Foundation
-import UIKit
 
-public class SearchLocationViewModel {
-    var searchSuggestion = Box([SearchSuggestion]())
+final public class SearchLocationViewModel {
+    internal var searchSuggestion = Box([SearchSuggestion]())
     
-    func getSuggestions (query: String) -> Void {
-        ApiFunctions.fetchLocationSuggestions(query: query) { [weak self] data in
+    var Delegate : ShowAlertDelegate?
+    
+    public func getSuggestions (query: String) -> Void {
+        ApiFunctions.fetchLocationSuggestions(query: query) { [weak self] data, errorString in
+            if let errorString = errorString {
+                self?.Delegate?.showAlert(alertMessage: errorString)
+                return
+            }
+            guard let data = data else {
+                return
+            }
             self?.searchSuggestion.value = data
         }
     }
     
-    init() {
+    public init() {
         getSuggestions(query: "New Delhi")
     }
 }
