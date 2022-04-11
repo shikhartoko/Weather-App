@@ -7,14 +7,12 @@
 
 import UIKit
 
-public class ForecastWeatherTableViewCell: UITableViewCell {
+internal class ForecastWeatherTableViewCell: UITableViewCell {
     
-    @IBOutlet public weak var dayLabel: UILabel!
-    @IBOutlet public weak var dayConditionImage: UIImageView!
-    @IBOutlet public weak var minTempLabel: UILabel!
-    @IBOutlet public weak var avgTempLabel: UILabel!
-    @IBOutlet public weak var maxTempLabel: UILabel!
+    @IBOutlet internal weak var dayLabel: UILabel!
+    @IBOutlet internal weak var dayConditionImage: UIImageView!
+    @IBOutlet internal weak var minTempLabel: UILabel!
+    @IBOutlet internal weak var avgTempLabel: UILabel!
+    @IBOutlet internal weak var maxTempLabel: UILabel!
     
-    public static let id : String = "forecastWeatherTableCellID"
-
 }

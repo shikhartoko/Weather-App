@@ -29,7 +29,7 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </searchBar>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationSuggestionTableCellId" id="cto-n1-bMa" customClass="LocationSuggestionTableViewCell" customModule="Weather_App" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationSuggestionTableViewCell" id="cto-n1-bMa" customClass="LocationSuggestionTableViewCell" customModule="Weather_App" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="88.666666030883789" width="428" height="85"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cto-n1-bMa" id="7ld-tz-mmk">
@@ -334,7 +334,7 @@
                                                             <constraint firstAttribute="height" constant="100" id="3pA-H7-Wad"/>
                                                         </constraints>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="forecastWeatherTableCellID" id="Y6y-aT-QWz" customClass="ForecastWeatherTableViewCell" customModule="Weather_App" customModuleProvider="target">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForecastWeatherTableViewCell" id="Y6y-aT-QWz" customClass="ForecastWeatherTableViewCell" customModule="Weather_App" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="40.333332061767578"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="forecastWeatherTableCellID" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y6y-aT-QWz" id="gQr-oI-7Ez">

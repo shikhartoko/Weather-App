@@ -147,16 +147,21 @@ extension MainScreenViewController : UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.forecastData.count
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! ForecastWeatherTableViewCell
         let item = self.forecastData[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: ForecastWeatherTableViewCell.id) as! ForecastWeatherTableViewCell
         cell.dayLabel?.text = item.day.lastFiveSubstring()
         cell.dayConditionImage.image = UIImage(named: item.condnUrl.getImageLocationFromUrl())
         cell.minTempLabel?.text = item.minTemp
         cell.avgTempLabel?.text = item.avgTemp
         cell.maxTempLabel?.text = item.maxTemp
-        return cell
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(cellClass: ForecastWeatherTableViewCell.self)
+        
+        return cell!
     }
 }
 

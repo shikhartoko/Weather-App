@@ -7,12 +7,12 @@
 
 import Foundation
 
-final public class SearchLocationViewModel {
+final internal class SearchLocationViewModel {
     internal var searchSuggestion = Box([SearchSuggestion]())
     
-    var Delegate : ShowAlertDelegate?
+    weak var Delegate : ShowAlertDelegate?
     
-    public func getSuggestions (query: String) -> Void {
+    internal func getSuggestions (query: String) -> Void {
         ApiFunctions.fetchLocationSuggestions(query: query) { [weak self] data, errorString in
             if let errorString = errorString {
                 self?.Delegate?.showAlert(alertMessage: errorString)
@@ -25,7 +25,7 @@ final public class SearchLocationViewModel {
         }
     }
     
-    public init() {
+    internal init() {
         getSuggestions(query: "New Delhi")
     }
 }

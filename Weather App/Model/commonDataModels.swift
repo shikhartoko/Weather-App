@@ -7,27 +7,27 @@
 
 import Foundation
 
-public struct Position : Codable {
-    public let lat : Double
-    public let lon : Double
+internal struct Position: Codable {
+    internal let lat : Double
+    internal let lon : Double
 }
 
-public struct Astro : Codable {
-    public let sunrise : String
-    public let sunset : String
-    public let moonrise : String
-    public let moonset : String
-    public let moonPhase : String
-    public let moonIllumination : String
+internal struct Astro: Codable {
+    internal let sunrise : String
+    internal let sunset : String
+    internal let moonrise : String
+    internal let moonset : String
+    internal let moonPhase : String
+    internal let moonIllumination : String
 }
 
-public struct AirQuality : Codable {
-    public let co : Double
-    public let o3 : Double
-    public let no2 : Double
-    public let so2 : Double
-    public let pm10 : Double
-    public let pm25 : Double
+internal struct AirQuality: Codable {
+    internal let co : Double
+    internal let o3 : Double
+    internal let no2 : Double
+    internal let so2 : Double
+    internal let pm10 : Double
+    internal let pm25 : Double
     
     enum Codingkeys : String, CodingKey {
         case co
@@ -49,53 +49,43 @@ public struct AirQuality : Codable {
     }
 }
 
-public struct Location : Codable {
-    public let name : String
-    public let region : String
-    public let country : String
-    public let lat : Double
-    public let lon : Double
-    public let tzId : String
-    public let localtimeEpoch : Int
-    public let localtime : String
+internal struct Location: Codable {
+    internal let name : String
+    internal let region : String
+    internal let country : String
+    internal let lat : Double
+    internal let lon : Double
+    internal let tzId : String
+    internal let localtimeEpoch : Int
+    internal let localtime : String
     
-    enum Codingkeys : String, CodingKey {
-        case name
-        case region
-        case country
-        case lat
-        case lon
-        case tzId
-        case localtimeEpoch
-        case localtime
-    }
 }
 
-public struct Condition : Codable {
-    public let text : String
-    public let icon : String
-    public let code : Int
+internal struct Condition: Codable {
+    internal let text : String
+    internal let icon : String
+    internal let code : Int
 }
 
-public struct WeatherDescription : Codable {
-    public let tempC : Double
-    public let tempF : Double
-    public let isDay : Int
-    public let condition : Condition
-    public let windMph : Double
-    public let windKph : Double
-    public let windDegree : Int
-    public let windDir : String
-    public let pressureMb : Double
-    public let pressureIn : Double
-    public let precipMm : Double
-    public let precipIn : Double
-    public let humidity : Int
-    public let cloud : Int
-    public let feelslikeC : Double
-    public let feelslikeF : Double
-    public let uv : Double
-    public let gustMph : Double
-    public let gustKph : Double
-    public let airQuality : AirQuality
+internal struct WeatherDescription: Codable {
+    internal let tempC : Double
+    internal let tempF : Double
+    internal let isDay : Int
+    internal let condition : Condition
+    internal let windMph : Double
+    internal let windKph : Double
+    internal let windDegree : Int
+    internal let windDir : String
+    internal let pressureMb : Double
+    internal let pressureIn : Double
+    internal let precipMm : Double
+    internal let precipIn : Double
+    internal let humidity : Int
+    internal let cloud : Int
+    internal let feelslikeC : Double
+    internal let feelslikeF : Double
+    internal let uv : Double
+    internal let gustMph : Double
+    internal let gustKph : Double
+    internal let airQuality : AirQuality
 }

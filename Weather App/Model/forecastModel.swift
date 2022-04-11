@@ -7,63 +7,62 @@
 
 import Foundation
 
-public struct CompleteDayForecast : Codable{
-    public let maxtempC : Double
-    public let maxtempF : Double
-    public let mintempC : Double
-    public let mintempF : Double
-    public let avgtempC : Double
-    public let avgtempF : Double
-    public let maxwindMph : Double
-    public let maxwindKph : Double
-    public let totalprecipMm : Double
-    public let totalprecipIn : Double
-    public let avghumidity : Int
-    public let condition : Condition
-    public let uv : Double
-    public let dailyWillItRain : Int
-    public let dailyChanceOfRain : Int
-    public let dailyWillItSnow : Int
-    public let dailyChanceOfSnow : Int
+internal struct CompleteDayForecast: Codable {
+    internal let maxtempC : Double
+    internal let maxtempF : Double
+    internal let mintempC : Double
+    internal let mintempF : Double
+    internal let avgtempC : Double
+    internal let avgtempF : Double
+    internal let maxwindMph : Double
+    internal let maxwindKph : Double
+    internal let totalprecipMm : Double
+    internal let totalprecipIn : Double
+    internal let avghumidity : Int
+    internal let condition : Condition
+    internal let uv : Double
+    internal let dailyWillItRain : Int
+    internal let dailyChanceOfRain : Int
+    internal let dailyWillItSnow : Int
+    internal let dailyChanceOfSnow : Int
 }
 
-public struct HourForecast : Codable {
-    public let time : String
-    public let tempC : Double
-    public let tempF : Double
-    public let condition : Condition
-    public let windMph : Double
-    public let windKph : Double
-    public let windDegree : Int
-    public let windDir : String
-    public let pressureMb : Double
-    public let pressureIn : Double
-    public let precipMm : Double
-    public let precipIn : Double
-    public let humidity : Int
-    public let cloud : Int
-    public let feelslikeC : Double
-    public let feelslikeF : Double
-    public let willItRain : Int
-    public let willItSnow : Int
-    public let isDay : Int
+internal struct HourForecast: Codable {
+    internal let time : String
+    internal let tempC : Double
+    internal let tempF : Double
+    internal let condition : Condition
+    internal let windMph : Double
+    internal let windKph : Double
+    internal let windDegree : Int
+    internal let windDir : String
+    internal let pressureMb : Double
+    internal let pressureIn : Double
+    internal let precipMm : Double
+    internal let precipIn : Double
+    internal let humidity : Int
+    internal let cloud : Int
+    internal let feelslikeC : Double
+    internal let feelslikeF : Double
+    internal let willItRain : Int
+    internal let willItSnow : Int
+    internal let isDay : Int
 }
 
-public struct ForecastDay : Codable {
-    public let date : String
-    public let dateEpoch : Int
-    public let day : CompleteDayForecast
-    public let astro : Astro
-    public let hour : [HourForecast]
+internal struct ForecastDay: Codable {
+    internal let date : String
+    internal let dateEpoch : Int
+    internal let day : CompleteDayForecast
+    internal let astro : Astro
+    internal let hour : [HourForecast]
 }
 
-public struct Forecast : Codable {
-    public let forecastday : [ForecastDay]
+internal struct Forecast: Codable {
+    internal let forecastday : [ForecastDay]
 }
 
-
-public struct ForecastWeatherResponse : Codable {
-    public let location : Location
-    public let current : WeatherDescription
-    public let forecast : Forecast
+internal struct ForecastWeatherResponse: Codable {
+    internal let location : Location
+    internal let current : WeatherDescription
+    internal let forecast : Forecast
 }

@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
-    func getImageLocationFromUrl () -> String{
+    func getImageLocationFromUrl () -> String {
         guard self.count >= 18 else {
             return ""
         }
@@ -26,6 +27,38 @@ extension String {
     }
 }
 
-protocol ShowAlertDelegate {
+protocol ShowAlertDelegate: AnyObject {
     func showAlert(alertMessage : String)
+}
+
+extension Collection {
+
+    // Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
+extension UITableViewCell {
+    
+    static var reuseIdentifier: String {
+        return String(describing: self)
+    }
+    
+}
+
+extension UITableView {
+    
+    public func register<T: UITableViewCell>(cellClass: T.Type) {
+        register(cellClass, forCellReuseIdentifier: cellClass.reuseIdentifier)
+    }
+    
+}
+
+extension UITableView {
+    
+    public func dequeue<T: UITableViewCell>(cellClass: T.Type) -> T? {
+        return dequeueReusableCell(withIdentifier: cellClass.reuseIdentifier) as? T
+    }
+    
 }

@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-public class ApiFunctions {
+internal class ApiFunctions {
     
     internal static func fetchLocationSuggestions(query : String, completion: @escaping ([SearchSuggestion]?, String?) -> Void) {
         let provider = MoyaProvider<Api>()
@@ -16,7 +16,6 @@ public class ApiFunctions {
             switch result {
             case .success(let response):
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     let result = try decoder.decode([SearchSuggestion].self, from: response.data)
                     completion(result, nil)

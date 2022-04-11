@@ -7,16 +7,16 @@
 
 import UIKit
 
-class SearchLocationViewController: UIViewController {
+internal class SearchLocationViewController: UIViewController {
     
     @IBOutlet private weak var locationSearchBar: UISearchBar!
     @IBOutlet private weak var locationSuggestionTable: UITableView!
     
-    static let id = "searchLocationViewController"
+    internal static let id = "searchLocationViewController"
     
-    public let searchLocationViewManager = SearchLocationViewModel()
-    public var currentWeatherViewModel = WeatherViewModel()
-    public var searchSuggestions : [SearchSuggestion] = []
+    internal let searchLocationViewManager = SearchLocationViewModel()
+    internal var currentWeatherViewModel = WeatherViewModel()
+    internal var searchSuggestions : [SearchSuggestion] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +48,9 @@ extension SearchLocationViewController : UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.searchSuggestions.count
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LocationSuggestionTableViewCell.id) as! LocationSuggestionTableViewCell
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! LocationSuggestionTableViewCell
         var item : SearchSuggestion
         if indexPath.row < self.searchSuggestions.count {
             item = self.searchSuggestions[indexPath.row]
@@ -62,7 +62,12 @@ extension SearchLocationViewController : UITableViewDelegate, UITableViewDataSou
         cell.countryLabel.text = item.country
         cell.bgView.layer.cornerRadius = 8
         cell.clipsToBounds = true
-        return cell
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(cellClass: LocationSuggestionTableViewCell.self)
+        
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

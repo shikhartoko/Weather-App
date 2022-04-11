@@ -7,9 +7,9 @@
 
 import UIKit
 
-class HourWeatherCollectionViewCell: UICollectionViewCell {
-    @IBOutlet public weak var timeLabel: UILabel!
-    @IBOutlet public weak var tempLabel: UILabel!
-    @IBOutlet public weak var conditionIcon: UIImageView!
-    static let id : String = "HourWeatherCollectionViewCellId"
+internal class HourWeatherCollectionViewCell: UICollectionViewCell {
+    @IBOutlet internal weak var timeLabel: UILabel!
+    @IBOutlet internal weak var tempLabel: UILabel!
+    @IBOutlet internal weak var conditionIcon: UIImageView!
+    internal static let id : String = "HourWeatherCollectionViewCellId"
 }

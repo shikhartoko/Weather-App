@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import CoreLocation
 
-public class WeatherViewModel {
+internal class WeatherViewModel {
     internal let locationName = Box("Loading..")
     internal let currentWeatherDescription = Box(CurrentWeatherCompact())
     internal let currentAirQuality = Box(AirQualityCompact())
@@ -19,7 +19,7 @@ public class WeatherViewModel {
     internal var hourforecastToday = Box([HourForecastCompact]())
     internal var astroToday = Box(AstroCompact())
     
-    var alertDelegate : ShowAlertDelegate?
+    weak var alertDelegate : ShowAlertDelegate?
     
     private static func roundTwoDecimal (value: Double) -> String {
         let val = round(value * 100) / 100.0
@@ -27,9 +27,9 @@ public class WeatherViewModel {
         return ans
     }
     
-    public static var defaultAddress = "New Delhi"
+    internal static var defaultAddress = "New Delhi"
     
-    private func checkCondition(conditionText : String) -> String {
+    private func deriveImageName(conditionText : String) -> String {
         if conditionText.contains("snow") || conditionText.contains("ice") ||
             conditionText.contains("blizzard") ||
             conditionText.contains("Blizzard"){
@@ -55,7 +55,7 @@ public class WeatherViewModel {
     
     private func getBackgroundImage(day: Int, conditionText: String) -> UIImage {
         let condition = conditionText.lowercased()
-        var conditionName = checkCondition(conditionText: condition)
+        var conditionName = deriveImageName(conditionText: condition)
         if conditionName == "default" || conditionName == "thunder" {
             return UIImage(named: conditionName)!
         }
@@ -67,7 +67,7 @@ public class WeatherViewModel {
         return UIImage(named: conditionName)!
     }
     
-    public func setCurrentLocation () {
+    internal func setCurrentLocation () {
         let locManager = CLLocationManager()
         locManager.requestWhenInUseAuthorization()
 
@@ -79,7 +79,7 @@ public class WeatherViewModel {
         }
     }
     
-    public func setForecastedData (futureDayForecast : [ForecastDay]) {
+    private func setForecastedData (futureDayForecast : [ForecastDay]) {
         var tempForecastedData = [DayForecastCompact]()
         // excluding first index since it corrosponds to current day
         for i in 1..<futureDayForecast.count {
@@ -89,7 +89,7 @@ public class WeatherViewModel {
         self.forecastedData.value = tempForecastedData
     }
     
-    public func setHourlyData (HourDayData : [HourForecast]) {
+    private func setHourlyData (HourDayData : [HourForecast]) {
         var temp = [HourForecastCompact]()
         for i in 0..<HourDayData.count {
             let hourData = HourDayData[i]
@@ -98,7 +98,7 @@ public class WeatherViewModel {
         self.hourforecastToday.value = temp
     }
     
-    public func changeLocation (to city: String) {
+    internal func changeLocation (to city: String) {
         locationName.value = "Loading"
         ApiFunctions.fetchForecastedData(city: city, days: 11, aqi: true, alerts: false) { data, errorString in
             if let errorString = errorString {

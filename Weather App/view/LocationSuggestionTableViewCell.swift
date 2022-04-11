@@ -7,12 +7,11 @@
 
 import UIKit
 
-class LocationSuggestionTableViewCell: UITableViewCell {
+internal class LocationSuggestionTableViewCell: UITableViewCell {
     
-    @IBOutlet public weak var nameLabel: UILabel!
-    @IBOutlet public weak var regionLabel: UILabel!
-    @IBOutlet public weak var countryLabel: UILabel!
-    @IBOutlet public weak var bgView: UIView!
-    public static let id = "locationSuggestionTableCellId"
+    @IBOutlet internal weak var nameLabel: UILabel!
+    @IBOutlet internal weak var regionLabel: UILabel!
+    @IBOutlet internal weak var countryLabel: UILabel!
+    @IBOutlet internal weak var bgView: UIView!
 
 }
